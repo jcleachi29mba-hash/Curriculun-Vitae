@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Julio Cesar Leachi — Analista de Dados, Power BI e Data Science">
   <title>Julio Cesar Leachi — Currículo Vitae</title>
+  <script>
+    (function () {
+      const theme = localStorage.getItem("cv-theme") || "dark";
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,9 +33,15 @@
         <li><a href="#experiencia"><i class="fa-solid fa-briefcase"></i> Experiência</a></li>
         <li><a href="#formacao"><i class="fa-solid fa-graduation-cap"></i> Formação</a></li>
       </ul>
-      <button class="navbar__toggle" id="nav-toggle" aria-label="Abrir menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+      <div class="navbar__actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">
+          <i class="fa-solid fa-sun theme-toggle__icon theme-toggle__icon--to-light"></i>
+          <i class="fa-solid fa-moon theme-toggle__icon theme-toggle__icon--to-dark"></i>
+        </button>
+        <button class="navbar__toggle" id="nav-toggle" aria-label="Abrir menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -38,12 +50,14 @@
     <section class="hero" id="hero">
       <div class="hero__content">
         <div class="hero__photo-wrapper">
-          <div class="hero__photo-ring"></div>
-          <img id="profile-photo" src="" alt="Foto de perfil" class="hero__photo">
-          <div class="hero__status">
-            <span class="hero__status-dot"></span>
-            Disponível
+          <div class="hero__photo-frame">
+            <img id="profile-photo" src="" alt="Foto de perfil" class="hero__photo">
+            <div class="hero__status">
+              <span class="hero__status-dot"></span>
+              Disponível
+            </div>
           </div>
+          <div class="hero__photo-contacts" id="photo-contacts"></div>
         </div>
         <div class="hero__text">
           <p class="hero__greeting"><i class="fa-solid fa-terminal"></i> Olá, eu sou</p>

@@ -31,14 +31,29 @@
 
     document.title = `${data.name} — Currículo Vitae`;
 
+    const renderContact = (c, extraClass) => {
+      const inner = `<i class="fa-solid ${c.icon.startsWith("fa-") ? c.icon : "fa-solid " + c.icon}"></i><span>${c.value}</span>`;
+      return c.href
+        ? `<a href="${c.href}" class="contact-chip ${extraClass}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+        : `<span class="contact-chip ${extraClass}">${inner}</span>`;
+    };
+
+    const isPhotoContact = c => /envelope|phone/.test(c.icon);
+
     const contactsEl = document.getElementById("profile-contacts");
     if (contactsEl) {
-      contactsEl.innerHTML = data.contacts.map(c => {
-        const inner = `<i class="fa-solid ${c.icon.startsWith("fa-") ? c.icon : "fa-solid " + c.icon}"></i><span>${c.value}</span>`;
-        return c.href
-          ? `<a href="${c.href}" class="contact-chip" target="_blank" rel="noopener noreferrer">${inner}</a>`
-          : `<span class="contact-chip">${inner}</span>`;
-      }).join("");
+      contactsEl.innerHTML = data.contacts
+        .filter(c => !isPhotoContact(c))
+        .map(c => renderContact(c, ""))
+        .join("");
+    }
+
+    const photoContactsEl = document.getElementById("photo-contacts");
+    if (photoContactsEl) {
+      photoContactsEl.innerHTML = data.contacts
+        .filter(isPhotoContact)
+        .map(c => renderContact(c, "contact-chip--photo"))
+        .join("");
     }
 
     const skillsEl = document.getElementById("profile-skills");
@@ -136,6 +151,31 @@
     ).join("");
   }
 
+  function initTheme() {
+    const toggle = document.getElementById("theme-toggle");
+    const root = document.documentElement;
+
+    const applyTheme = theme => {
+      root.setAttribute("data-theme", theme);
+      localStorage.setItem("cv-theme", theme);
+      toggle?.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+      );
+      toggle?.setAttribute(
+        "title",
+        theme === "dark" ? "Tema claro" : "Tema escuro"
+      );
+    };
+
+    toggle?.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
+
+    applyTheme(root.getAttribute("data-theme") || "dark");
+  }
+
   function initNavbar() {
     const navbar = document.getElementById("navbar");
     const toggle = document.getElementById("nav-toggle");
@@ -188,6 +228,7 @@
   renderCourses();
   renderLanguages();
   renderFooter();
+  initTheme();
   initNavbar();
   initScrollAnimations();
 })();

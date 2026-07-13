@@ -6,9 +6,11 @@ const profileData = {
   name: "Julio Cesar Leachi",
   title: "Analista de Dados | Instrutor Power BI, Excel e Informática",
   tagline: "Transformo dados em decisões estratégicas — especialista em Data Science e Analytics, comunicativo e sempre atento às inovações do mercado de Big Data.",
-  photo: "https://github.com/jcleachi.png",
+  photo: "assets/foto-cv.jpeg",
 
   contacts: [
+    { icon: "fa-envelope", label: "E-mail", value: "jcleachi29@outlook.com", href: "mailto:jcleachi29@outlook.com" },
+    { icon: "fa-phone", label: "Celular", value: "(11) 99740-6963", href: "tel:+5511997406963" },
     { icon: "fa-location-dot", label: "Localização", value: "São Bernardo do Campo, SP", href: null },
     { icon: "fa-brands fa-linkedin", label: "LinkedIn", value: "linkedin.com/in/juliocesarleachi2908", href: "https://www.linkedin.com/in/juliocesarleachi2908/" },
     { icon: "fa-brands fa-github", label: "GitHub", value: "github.com/jcleachi", href: "https://github.com/jcleachi" }

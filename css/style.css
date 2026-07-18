@@ -130,6 +130,7 @@ ul {
   filter: blur(120px);
   pointer-events: none;
   z-index: 0;
+  will-change: opacity, transform;
 }
 
 .bg-glow--1 {
@@ -138,6 +139,7 @@ ul {
   background: var(--glow-1);
   top: -200px;
   right: -100px;
+  animation: glow-breathe 9s ease-in-out infinite;
 }
 
 .bg-glow--2 {
@@ -146,6 +148,19 @@ ul {
   background: var(--glow-2);
   bottom: 20%;
   left: -150px;
+  animation: glow-breathe 11s ease-in-out infinite reverse;
+  animation-delay: -3s;
+}
+
+@keyframes glow-breathe {
+  0%, 100% {
+    opacity: 0.75;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-14px) scale(1.06);
+  }
 }
 
 /* ===== Navbar ===== */
@@ -323,6 +338,21 @@ ul {
     0 0 0 1px var(--border-accent),
     0 8px 32px var(--photo-shadow);
   background: var(--bg-card);
+  animation: photo-glow 5s ease-in-out infinite;
+}
+
+@keyframes photo-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px var(--border-accent),
+      0 8px 32px var(--photo-shadow);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px var(--border-accent),
+      0 8px 32px var(--photo-shadow),
+      0 0 26px var(--accent-glow);
+  }
 }
 
 .hero__photo-frame {
@@ -886,6 +916,16 @@ ul {
 .fade-in.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glow--1,
+  .bg-glow--2,
+  .hero__photo-wrapper,
+  .hero__status-dot,
+  .hero__scroll {
+    animation: none;
+  }
 }
 
 /* ===== Responsive ===== */
